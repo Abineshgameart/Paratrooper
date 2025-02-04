@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 3970361884739176027}
   - component: {fileID: 7864276617534701556}
   - component: {fileID: 3426702645532256045}
-  - component: {fileID: 607632901613424428}
   m_Layer: 0
   m_Name: Jet
   m_TagString: Enemy
@@ -97,20 +96,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &607632901613424428
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 270955663186720135}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62f984b023f960f46b79a01cef77ea23, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 5
-  rb: {fileID: 3426702645532256045}
 --- !u!1 &4607337012772136238
 GameObject:
   m_ObjectHideFlags: 0

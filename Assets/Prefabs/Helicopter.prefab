@@ -95,7 +95,6 @@ GameObject:
   - component: {fileID: 4850003662794103038}
   - component: {fileID: 5187382994027781160}
   - component: {fileID: 1168708886850171447}
-  - component: {fileID: 7543831394967409243}
   m_Layer: 0
   m_Name: Helicopter
   m_TagString: Enemy
@@ -181,17 +180,3 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &7543831394967409243
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3094159548017734641}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62f984b023f960f46b79a01cef77ea23, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 5
-  rb: {fileID: 1168708886850171447}
