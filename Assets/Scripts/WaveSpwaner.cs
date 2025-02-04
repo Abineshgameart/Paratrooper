@@ -47,7 +47,7 @@ public class WaveSpwaner : MonoBehaviour
 
     void SpawnWave()
     {
-        GameObject[] totalEnemies = GameObject.FindGameObjectsWithTag("Enemy");
+        GameObject[] totalEnemies = GameObject.FindGameObjectsWithTag("Aircraft");
 
         if (canSpwan && nextSpwanTime < Time.time)
         {
@@ -96,5 +96,7 @@ public class WaveSpwaner : MonoBehaviour
             spawnedEnemyRb.velocity = randomPoint.right * currentWave.movementSpeed;
         }
     }
+
+
 
 }

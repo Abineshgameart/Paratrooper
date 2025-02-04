@@ -1740,12 +1740,14 @@ MonoBehaviour:
     - {fileID: 3094159548017734641, guid: 4314c1e8b9e3c9843a13ca0c5317cc74, type: 3}
     minSpwanInterval: 0.5
     maxSpwanInterval: 2
+    movementSpeed: 5
   - waveName: Jet
     NumOfEnemies: 3
     typesOfEnemies:
     - {fileID: 270955663186720135, guid: 3406316bc67ba2649946f0fa8674f0be, type: 3}
     minSpwanInterval: 0.5
     maxSpwanInterval: 3
+    movementSpeed: 3
   spwanPoints:
   - {fileID: 492635743}
   - {fileID: 388342831}
