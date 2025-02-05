@@ -11,10 +11,11 @@ GameObject:
   - component: {fileID: 3970361884739176027}
   - component: {fileID: 7864276617534701556}
   - component: {fileID: 3426702645532256045}
-  - component: {fileID: 607632901613424428}
-  m_Layer: 0
+  - component: {fileID: 7219865066888527060}
+  - component: {fileID: 8411476020833927335}
+  m_Layer: 12
   m_Name: Jet
-  m_TagString: Enemy
+  m_TagString: Aircraft
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -33,6 +34,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5607198867534807446}
+  - {fileID: 3210439796377977883}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!70 &7864276617534701556
@@ -50,7 +52,7 @@ CapsuleCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8192
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -97,7 +99,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &607632901613424428
+--- !u!114 &7219865066888527060
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -106,11 +108,55 @@ MonoBehaviour:
   m_GameObject: {fileID: 270955663186720135}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62f984b023f960f46b79a01cef77ea23, type: 3}
+  m_Script: {fileID: 11500000, guid: 09e0f0e390c399e4f9b207316f66d5e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
-  rb: {fileID: 3426702645532256045}
+--- !u!114 &8411476020833927335
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 270955663186720135}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f7a9e508175e3c4c87330f445ca5fc9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyBullet: {fileID: 11400000, guid: 0493db09e3f943a4098deabbd4a16703, type: 2}
+  spawnPoint: {fileID: 3210439796377977883}
+  shooter: {fileID: 0}
+--- !u!1 &3090465895156281002
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3210439796377977883}
+  m_Layer: 12
+  m_Name: BombSpawnPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3210439796377977883
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3090465895156281002}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.074, y: -0.129, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3970361884739176027}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4607337012772136238
 GameObject:
   m_ObjectHideFlags: 0
@@ -121,7 +167,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5607198867534807446}
   - component: {fileID: 6326788764120070302}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Capsule
   m_TagString: Untagged
   m_Icon: {fileID: 0}

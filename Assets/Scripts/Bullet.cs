@@ -1,4 +1,3 @@
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
@@ -11,13 +10,14 @@ public class Bullet : MonoBehaviour
     void Start()
     {
         rb.velocity = transform.up * speed;
+        Destroy(gameObject, 5f);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     { 
         Destroy(gameObject);
 
-        if (collision.gameObject.CompareTag("Enemy"))
+        if (collision.gameObject.CompareTag("Aircraft") || collision.gameObject.CompareTag("Paratrooper") || collision.gameObject.CompareTag("EnemyBullet"))
         {
             Destroy(collision.gameObject);
         }

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7436483241222028907}
   - component: {fileID: 6770729515028124975}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Capsule
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -95,10 +95,11 @@ GameObject:
   - component: {fileID: 4850003662794103038}
   - component: {fileID: 5187382994027781160}
   - component: {fileID: 1168708886850171447}
-  - component: {fileID: 7543831394967409243}
-  m_Layer: 0
+  - component: {fileID: 230359293280193387}
+  - component: {fileID: 3936708906407818317}
+  m_Layer: 12
   m_Name: Helicopter
-  m_TagString: Enemy
+  m_TagString: Aircraft
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -117,6 +118,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7436483241222028907}
+  - {fileID: 4318426272573658768}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!70 &5187382994027781160
@@ -134,7 +136,7 @@ CapsuleCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8192
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -181,7 +183,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &7543831394967409243
+--- !u!114 &230359293280193387
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -190,8 +192,55 @@ MonoBehaviour:
   m_GameObject: {fileID: 3094159548017734641}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62f984b023f960f46b79a01cef77ea23, type: 3}
+  m_Script: {fileID: 11500000, guid: 5eaa8fa07fee3f945bb8d623a06e7c4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
-  rb: {fileID: 1168708886850171447}
+  paratrooperPrefab: {fileID: 4087387948733761007, guid: c70911f7e57061a4d8f3c847a889de7a, type: 3}
+  spawnPoint: {fileID: 4318426272573658768}
+  minSpawnInterval: 0.5
+  maxSpawnInterval: 3
+  landingSpeed: 2
+  centerGap: 4
+--- !u!114 &3936708906407818317
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3094159548017734641}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09e0f0e390c399e4f9b207316f66d5e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &8995106791562030140
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4318426272573658768}
+  m_Layer: 12
+  m_Name: paratrooperSpawnPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4318426272573658768
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8995106791562030140}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.388, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4850003662794103038}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
