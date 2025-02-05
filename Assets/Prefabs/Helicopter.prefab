@@ -200,7 +200,7 @@ MonoBehaviour:
   minSpawnInterval: 0.5
   maxSpawnInterval: 3
   landingSpeed: 2
-  centerGap: 4
+  centerGap: 8
 --- !u!114 &3936708906407818317
 MonoBehaviour:
   m_ObjectHideFlags: 0
