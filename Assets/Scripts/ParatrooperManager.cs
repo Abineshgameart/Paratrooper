@@ -101,6 +101,8 @@ public class ParatrooperManager : MonoBehaviour
     //}
 
 
+    public float waitingTimeToStartClimbing = 5f;
+
     public Transform shooter;
     public Transform leftTargetPosition; // Left side target (empty GameObject)
     public Transform rightTargetPosition; // Right side target (empty GameObject)
@@ -164,7 +166,7 @@ public class ParatrooperManager : MonoBehaviour
     private IEnumerator WaitAndStartClimbing()
     {
         // Wait for 3 seconds after landing
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(waitingTimeToStartClimbing);
 
         // Check if there are enough paratroopers
         if (landedParatroopers.Count >= 4)
@@ -175,57 +177,30 @@ public class ParatrooperManager : MonoBehaviour
             GameObject[] rightSideParatroopers = landedParatroopers.FindAll(p => p.transform.position.x >= screenCenterX).ToArray();
 
             // Sort the paratroopers by distance to the shooter (only for the left or right side)
+            //System.Array.Sort(leftSideParatroopers, (a, b) =>
+            //    Mathf.Abs(a.transform.position.x - shooter.position.x).CompareTo(Mathf.Abs(b.transform.position.x - shooter.position.x))
+            //);
+
+            //System.Array.Sort(rightSideParatroopers, (a, b) =>
+            //    Mathf.Abs(a.transform.position.x - shooter.position.x).CompareTo(Mathf.Abs(b.transform.position.x - shooter.position.x))
+            //);
+
+            // Sort by overall distance to the shooter (closer ones first)
             System.Array.Sort(leftSideParatroopers, (a, b) =>
-                Mathf.Abs(a.transform.position.x - shooter.position.x).CompareTo(Mathf.Abs(b.transform.position.x - shooter.position.x))
+                Vector2.Distance(a.transform.position, shooter.position)
+                .CompareTo(Vector2.Distance(b.transform.position, shooter.position))
             );
 
             System.Array.Sort(rightSideParatroopers, (a, b) =>
-                Mathf.Abs(a.transform.position.x - shooter.position.x).CompareTo(Mathf.Abs(b.transform.position.x - shooter.position.x))
+                Vector2.Distance(a.transform.position, shooter.position)
+                .CompareTo(Vector2.Distance(b.transform.position, shooter.position))
             );
+
 
             GameObject[] firstFour = moveLeftSide
                                     ? leftSideParatroopers.Take(4).ToArray()
                                     : rightSideParatroopers.Take(4).ToArray();
 
-            // Now move them toward the target
-            //if (moveLeftSide)
-            //{
-            //    // First paratrooper (no climbing)
-            //    yield return StartCoroutine(MoveToPosition(firstFour[0], leftTargetPosition.position));
-
-            //    // Second paratrooper (move and climb)
-            //    yield return StartCoroutine(MoveToPosition(firstFour[1], new Vector3(leftTargetPosition.position.x + stepSpacing, leftTargetPosition.position.y, 0)));
-            //    yield return StartCoroutine(ClimbUp(firstFour[1], leftTargetPosition.position.y + stepHeight));
-
-            //    // Third paratrooper (no climbing)
-            //    yield return StartCoroutine(MoveToPosition(firstFour[2], new Vector3(leftTargetPosition.position.x - stepSpacing, leftTargetPosition.position.y, 0)));
-
-            //    // Fourth paratrooper (move and climb)
-            //    yield return StartCoroutine(MoveToPosition(firstFour[3], new Vector3(leftTargetPosition.position.x, leftTargetPosition.position.y, 0)));
-            //    yield return StartCoroutine(ClimbUp(firstFour[3], leftTargetPosition.position.y + stepHeight));
-            //}
-            //else
-            //{
-            //    // Right side logic (similar structure as left side)
-
-            //    // First paratrooper (no climbing)
-            //    yield return StartCoroutine(MoveToPosition(firstFour[0], rightTargetPosition.position));
-
-            //    // Second paratrooper (move and climb)
-            //    yield return StartCoroutine(MoveToPosition(firstFour[1], new Vector3(rightTargetPosition.position.x - stepSpacing, rightTargetPosition.position.y, 0)));
-            //    yield return StartCoroutine(ClimbUp(firstFour[1], rightTargetPosition.position.y + stepHeight));
-
-            //    // Third paratrooper (no climbing)
-            //    yield return StartCoroutine(MoveToPosition(firstFour[2], new Vector3(rightTargetPosition.position.x + stepSpacing, rightTargetPosition.position.y, 0)));
-
-            //    // Fourth paratrooper (move and climb)
-            //    yield return StartCoroutine(MoveToPosition(firstFour[3], new Vector3(rightTargetPosition.position.x, rightTargetPosition.position.y, 0)));
-            //    yield return StartCoroutine(ClimbUp(firstFour[3], rightTargetPosition.position.y + stepHeight));
-            //}
-
-            //// Destroy the shooter when the fourth paratrooper reaches the top
-            //Destroy(shooter.gameObject);
-            //Debug.Log("Shooter Destroyed!");
 
             if (moveLeftSide)
             {
@@ -243,7 +218,7 @@ public class ParatrooperManager : MonoBehaviour
         // Get the width and height of the first paratrooper (assuming all have the same size)
         SpriteRenderer spriteRenderer = paratroopers[0].GetComponent<SpriteRenderer>();
         float stepSpacing = spriteRenderer.bounds.size.x; // Use sprite width for spacing
-        float stepHeight = spriteRenderer.bounds.size.y + 0.5f;  // Use sprite height for climbing
+        float stepHeight = spriteRenderer.bounds.size.y + 0.1f;  // Use sprite height for climbing
 
         // First paratrooper (no climbing)
         yield return StartCoroutine(MoveToPosition(paratroopers[0], targetPosition.position));
@@ -252,16 +227,32 @@ public class ParatrooperManager : MonoBehaviour
         Vector3 secondTarget = new Vector3(targetPosition.position.x + (isLeftSide ? -stepSpacing : stepSpacing), targetPosition.position.y, 0);
         yield return StartCoroutine(MoveToPosition(paratroopers[1], secondTarget));
         yield return StartCoroutine(ClimbUp(paratroopers[1], targetPosition.position.y + stepHeight));
-        yield return StartCoroutine(MoveToPosition(paratroopers[1], new Vector3(secondTarget.x, secondTarget.y + stepHeight, 0))); // Move slightly forward after climbing
+        yield return StartCoroutine(MoveToPosition(paratroopers[1], new Vector3(secondTarget.x + (isLeftSide ? stepSpacing : -stepSpacing), secondTarget.y + stepHeight, 0))); // Move slightly forward after climbing
 
         // Third paratrooper (no climbing)
         Vector3 thirdTarget = new Vector3(targetPosition.position.x - (isLeftSide ? stepSpacing : -stepSpacing), targetPosition.position.y, 0);
         yield return StartCoroutine(MoveToPosition(paratroopers[2], thirdTarget));
 
-        // Fourth paratrooper (move, climb, and step forward)
-        yield return StartCoroutine(MoveToPosition(paratroopers[3], targetPosition.position));
-        yield return StartCoroutine(ClimbUp(paratroopers[3], targetPosition.position.y + stepHeight));
-        yield return StartCoroutine(MoveToPosition(paratroopers[3], new Vector3(targetPosition.position.x, targetPosition.position.y + 0.1f, 0))); // Move slightly forward after climbing
+        // Fourth paratrooper (move, climb three times)
+        // Move to initial fourth position
+        Vector3 fourthTarget = new Vector3(targetPosition.position.x + (isLeftSide ? -stepSpacing * 2 : stepSpacing * 2), targetPosition.position.y, 0);
+        yield return StartCoroutine(MoveToPosition(paratroopers[3], fourthTarget));
+
+        // First climb
+        Vector3 climb1Pos = new Vector3(fourthTarget.x + (isLeftSide ? stepSpacing : -stepSpacing), fourthTarget.y + stepHeight, 0);
+        yield return StartCoroutine(ClimbUp(paratroopers[3], climb1Pos.y));
+        yield return StartCoroutine(MoveToPosition(paratroopers[3], climb1Pos));
+
+        // Second climb
+        Vector3 climb2Pos = new Vector3(climb1Pos.x + (isLeftSide ? stepSpacing : -stepSpacing), climb1Pos.y + stepHeight, 0);
+        yield return StartCoroutine(ClimbUp(paratroopers[3], climb2Pos.y));
+        yield return StartCoroutine(MoveToPosition(paratroopers[3], climb2Pos));
+
+        // Third climb
+        Vector3 climb3Pos = new Vector3(climb2Pos.x + (isLeftSide ? stepSpacing : -stepSpacing), climb2Pos.y + stepHeight, 0);
+        yield return StartCoroutine(ClimbUp(paratroopers[3], climb3Pos.y));
+        yield return StartCoroutine(MoveToPosition(paratroopers[3], climb3Pos));
+
     }
 
 
