@@ -19,6 +19,7 @@ public class WaveSpwaner : MonoBehaviour
     public Transform[] spwanPoints;
     public Transform jetSpwan;
 
+
     // Private
     private Wave currentWave;
     private int currentWaveNumber;
@@ -29,6 +30,8 @@ public class WaveSpwaner : MonoBehaviour
     private Transform randomPoint;
 
     private bool canSpwan = true;
+
+    ParatrooperManager ParatrooperManager;
 
 
     // Start is called before the first frame update
@@ -41,8 +44,13 @@ public class WaveSpwaner : MonoBehaviour
     void Update()
     {
         currentWave = waves[currentWaveNumber];
-        SpawnWave();
-        
+
+        ParatrooperManager = FindAnyObjectByType<ParatrooperManager>();
+        if (!ParatrooperManager.stopSpawning)
+        {
+            SpawnWave();
+        }
+
     }
 
     void SpawnWave()
@@ -96,7 +104,5 @@ public class WaveSpwaner : MonoBehaviour
             spawnedEnemyRb.velocity = randomPoint.right * currentWave.movementSpeed;
         }
     }
-
-
 
 }

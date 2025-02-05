@@ -8,6 +8,8 @@ TagManager:
   - Paratrooper
   - Aircraft
   - Shooter
+  - Ground
+  - EnemyBullet
   layers:
   - Default
   - TransparentFX
@@ -21,9 +23,9 @@ TagManager:
   - Gunholder
   - Base
   - wall
-  - 
+  - Aircraft
   - Paratrooper
-  - 
+  - EnemyBullet
   - 
   - 
   - 

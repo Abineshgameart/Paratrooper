@@ -1,4 +1,3 @@
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
@@ -18,7 +17,7 @@ public class Bullet : MonoBehaviour
     { 
         Destroy(gameObject);
 
-        if (collision.gameObject.CompareTag("Aircraft") || collision.gameObject.CompareTag("Paratrooper"))
+        if (collision.gameObject.CompareTag("Aircraft") || collision.gameObject.CompareTag("Paratrooper") || collision.gameObject.CompareTag("EnemyBullet"))
         {
             Destroy(collision.gameObject);
         }
