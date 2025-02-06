@@ -10,6 +10,9 @@ TagManager:
   - Shooter
   - Ground
   - EnemyBullet
+  - Audio
+  - Score
+  - Canvas
   layers:
   - Default
   - TransparentFX
@@ -26,10 +29,10 @@ TagManager:
   - Aircraft
   - Paratrooper
   - EnemyBullet
+  - Audio
   - 
   - 
-  - 
-  - 
+  - Canvas
   - 
   - 
   - 
