@@ -195,7 +195,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5eaa8fa07fee3f945bb8d623a06e7c4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  paratrooperPrefab: {fileID: 4087387948733761007, guid: c70911f7e57061a4d8f3c847a889de7a, type: 3}
+  paratrooperPrefab: {fileID: 4349347517366325397, guid: 1a227ad4e6bfd4f4092cb6a20f19e66c, type: 3}
   spawnPoint: {fileID: 4318426272573658768}
   minSpawnInterval: 0.5
   maxSpawnInterval: 3
