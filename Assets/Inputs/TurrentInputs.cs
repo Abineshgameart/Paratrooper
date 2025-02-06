@@ -44,13 +44,22 @@ public partial class @TurrentInputs: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Esc"",
+                    ""type"": ""Button"",
+                    ""id"": ""97c01d71-8e67-4717-9ebc-4bb27af28ad8"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
                 {
                     ""name"": """",
                     ""id"": ""40723f10-f1f4-4a8b-abb6-324b71113a88"",
-                    ""path"": ""<Keyboard>/numpad8"",
+                    ""path"": ""<Keyboard>/upArrow"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -90,6 +99,17 @@ public partial class @TurrentInputs: IInputActionCollection2, IDisposable
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9353fac1-ed8e-4599-a930-994768ca6b33"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Esc"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -112,6 +132,7 @@ public partial class @TurrentInputs: IInputActionCollection2, IDisposable
         m_TurrentRotation = asset.FindActionMap("TurrentRotation", throwIfNotFound: true);
         m_TurrentRotation_Move = m_TurrentRotation.FindAction("Move", throwIfNotFound: true);
         m_TurrentRotation_Fire = m_TurrentRotation.FindAction("Fire", throwIfNotFound: true);
+        m_TurrentRotation_Esc = m_TurrentRotation.FindAction("Esc", throwIfNotFound: true);
     }
 
     ~@TurrentInputs()
@@ -180,12 +201,14 @@ public partial class @TurrentInputs: IInputActionCollection2, IDisposable
     private List<ITurrentRotationActions> m_TurrentRotationActionsCallbackInterfaces = new List<ITurrentRotationActions>();
     private readonly InputAction m_TurrentRotation_Move;
     private readonly InputAction m_TurrentRotation_Fire;
+    private readonly InputAction m_TurrentRotation_Esc;
     public struct TurrentRotationActions
     {
         private @TurrentInputs m_Wrapper;
         public TurrentRotationActions(@TurrentInputs wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_TurrentRotation_Move;
         public InputAction @Fire => m_Wrapper.m_TurrentRotation_Fire;
+        public InputAction @Esc => m_Wrapper.m_TurrentRotation_Esc;
         public InputActionMap Get() { return m_Wrapper.m_TurrentRotation; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -201,6 +224,9 @@ public partial class @TurrentInputs: IInputActionCollection2, IDisposable
             @Fire.started += instance.OnFire;
             @Fire.performed += instance.OnFire;
             @Fire.canceled += instance.OnFire;
+            @Esc.started += instance.OnEsc;
+            @Esc.performed += instance.OnEsc;
+            @Esc.canceled += instance.OnEsc;
         }
 
         private void UnregisterCallbacks(ITurrentRotationActions instance)
@@ -211,6 +237,9 @@ public partial class @TurrentInputs: IInputActionCollection2, IDisposable
             @Fire.started -= instance.OnFire;
             @Fire.performed -= instance.OnFire;
             @Fire.canceled -= instance.OnFire;
+            @Esc.started -= instance.OnEsc;
+            @Esc.performed -= instance.OnEsc;
+            @Esc.canceled -= instance.OnEsc;
         }
 
         public void RemoveCallbacks(ITurrentRotationActions instance)
@@ -241,5 +270,6 @@ public partial class @TurrentInputs: IInputActionCollection2, IDisposable
     {
         void OnMove(InputAction.CallbackContext context);
         void OnFire(InputAction.CallbackContext context);
+        void OnEsc(InputAction.CallbackContext context);
     }
 }
